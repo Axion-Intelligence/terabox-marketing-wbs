@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeraBox AI通过系统市场营销 - 优化版WBS工作分解结构表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .project-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        
+        .wbs-note {
+            background: linear-gradient(to right, #fff9c4, #ffeb3b);
+            padding: 12px 20px;
+            border-left: 5px solid #f9a825;
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #4a90e2, #7b68ee);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        th {
+            padding: 12px 6px;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-align: center;
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 8px 5px;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+        
+        /* 层级样式 */
+        .level-1 {
+            background: #e3f2fd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .level-2 {
+            background: #f5f9ff;
+            font-weight: 600;
+        }
+        
+        .level-3 {
+            background: #ffffff;
+        }
+        
+        .level-4 {
+            background: #fafafa;
+            font-style: italic;
+        }
+        
+        /* 缩进样式 */
+        .indent-1 { padding-left: 20px !important; }
+        .indent-2 { padding-left: 40px !important; }
+        .indent-3 { padding-left: 60px !important; }
+        
+        /* 特殊标记 */
+        .highlight {
+            background: #ffb74d !important;
+            font-weight: bold;
+        }
+        
+        .milestone {
+            background: #ff5252;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            margin-left: 8px;
+        }
+        
+        .pending {
+            background: #fff3cd;
+        }
+        
+        .wbs-code {
+            text-align: center;
+            font-weight: bold;
+            color: #1976d2;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .task-name {
+            min-width: 250px;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .role-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 11px;
+        }
+        
+        .role-r { background: #4caf50; color: white; }
+        .role-a { background: #ff9800; color: white; }
+        .role-as { background: #03a9f4; color: white; }
+        .role-c { background: #9c27b0; color: white; }
+        .role-i { background: #607d8b; color: white; }
+        
+        .status-complete { 
+            background: #d4edda; 
+            color: #155724; 
+            padding: 2px 6px; 
+            border-radius: 10px;
+            font-size: 11px;
+        }
+        .status-progress { 
+            background: #fff3cd; 
+            color: #856404; 
+            padding: 2px 6px; 
+            border-radius: 10px;
+            font-size: 11px;
+        }
+        .status-pending { 
+            background: #f8d7da; 
+            color: #721c24; 
+            padding: 2px 6px; 
+            border-radius: 10px;
+            font-size: 11px;
+        }
+        
+        .budget {
+            text-align: right;
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .duration {
+            text-align: center;
+            font-weight: 600;
+            color: #d32f2f;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd !important;
+            transition: background 0.3s;
+        }
+        
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; }
+            thead { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>【项目管理】TeraBox AI通过系统市场营销项目 - 优化版WBS</h1>
+            <div class="project-info">
+                <div class="info-item">
+                    <strong>项目名称：</strong>TeraBox AI通过系统
+                </div>
+                <div class="info-item">
+                    <strong>项目经理：</strong>祁嘉恒
+                </div>
+                <div class="info-item">
+                    <strong>制作日期：</strong>2025/9/14
+                </div>
+                <div class="info-item">
+                    <strong>更新版本：</strong>v3.0 优化版
+                </div>
+                <div class="info-item">
+                    <strong>审批人：</strong>荆总
+                </div>
+            </div>
+        </div>
+        
+        <div class="wbs-note">
+            📋 工作分解结构 WBS（R=负责 Responsible | As=辅助 Assist | C=咨询 Consulted | A=审批 Approve | I=知情 Informed）
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 6%">WBS编码</th>
+                    
+                    <th rowspan="2" style="width: 10%">任务分类</th>
+                    <th rowspan="2" style="width: 22%">具体工作内容</th>
+                    <th rowspan="2" style="width: 14%">可交付成果</th>
+                    <th colspan="2" style="width: 12%">计划时间</th>
+                    <th rowspan="2" style="width: 5%">工期(天)</th>
+                    <th rowspan="2" style="width: 6%">预算(万元)</th>
+                    <th rowspan="2" style="width: 5%">里程碑</th>
+                    <th rowspan="2" style="width: 6%">项目状态</th>
+                    <th colspan="5" style="width: 14%">RACI矩阵</th>
+                </tr>
+                <tr>
+                    <th style="width: 6%">开始时间</th>
+                    <th style="width: 6%">结束时间</th>
+                    <th>苏总</th>
+                    <th>祁嘉恒</th>
+                    <th>AI-Shurui</th>
+                    <th>业务-小王</th>
+                    <th>其他</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 第一阶段：项目启动与准备 -->
+                <tr class="level-1">
+                    <td class="wbs-code">1</td>
+                    <td rowspan="11"><strong>第一阶段<br>项目启动<br>与准备</strong></td>
+                    <td class="task-name"><strong>项目启动与准备阶段</strong></td>
+                    <td>项目立项文档、团队组建</td>
+                    <td class="center">9/14</td>
+                    <td class="center">9/30</td>
+                    <td class="duration">17</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-progress">进行中</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 1.1 前期研讨 -->
+                <tr class="level-2">
+                    <td class="wbs-code">1.1</td>
+                    <td class="task-name indent-1"><strong>前期研讨</strong></td>
+                    <td>项目立项与团队组建</td>
+                    <td class="center">9/14</td>
+                    <td class="center">9/16</td>
+                    <td class="duration">3</td>
+                    <td class="budget">2.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-complete">完成</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">1.1.1</td>
+                    <td class="task-name indent-2">项目研讨（人员分配，工作流程等）</td>
+                    <td>会议纪要、人员名单</td>
+                    <td class="center">9/14</td>
+                    <td class="center">9/14</td>
+                    <td class="duration">1</td>
+                    <td class="budget">0.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-complete">完成</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">1.1.2</td>
+                    <td class="task-name indent-2">工作分解结构表完善</td>
+                    <td>WBS文档v3.0</td>
+                    <td class="center">9/15</td>
+                    <td class="center">9/16</td>
+                    <td class="duration">2</td>
+                    <td class="budget">1.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-progress">进行中</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 1.2 产品准备 -->
+                <tr class="level-2">
+                    <td class="wbs-code">1.2</td>
+                    <td class="task-name indent-1"><strong>产品定义与准备</strong></td>
+                    <td>产品基础信息确定</td>
+                    <td class="center">9/17</td>
+                    <td class="center">9/25</td>
+                    <td class="duration">9</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">1.2.1</td>
+                    <td class="task-name indent-2">产品信息确定（名字，ID，宣传语，logo等）</td>
+                    <td>品牌VI手册</td>
+                    <td class="center">9/17</td>
+                    <td class="center">9/19</td>
+                    <td class="duration">3</td>
+                    <td class="budget">2.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">1.2.2</td>
+                    <td class="task-name indent-2">产品营销策略（SNS账号）</td>
+                    <td>营销策略文档</td>
+                    <td class="center">9/20</td>
+                    <td class="center">9/21</td>
+                    <td class="duration">2</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">市场部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">1.2.3</td>
+                    <td class="task-name indent-2">产品卖点总结</td>
+                    <td>核心卖点文档</td>
+                    <td class="center">9/22</td>
+                    <td class="center">9/23</td>
+                    <td class="duration">2</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">产品部</td>
+                </tr>
+                <tr class="level-3 highlight">
+                    <td class="wbs-code">1.2.4</td>
+                    <td class="task-name indent-2"><strong>产品商标，知识产权等（需决策）</strong></td>
+                    <td>知识产权申请文件</td>
+                    <td class="center">9/24</td>
+                    <td class="center">9/25</td>
+                    <td class="duration">2</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">法务部</td>
+                </tr>
+                
+                <!-- 1.3 素材准备 -->
+                <tr class="level-2">
+                    <td class="wbs-code">1.3</td>
+                    <td class="task-name indent-1"><strong>基础素材准备</strong></td>
+                    <td>素材库建立</td>
+                    <td class="center">9/26</td>
+                    <td class="center">9/30</td>
+                    <td class="duration">5</td>
+                    <td class="budget">3.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">设计部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">1.3.1</td>
+                    <td class="task-name indent-2">产品使用素材（录屏操作等）</td>
+                    <td>操作视频、截图素材</td>
+                    <td class="center">9/26</td>
+                    <td class="center">9/30</td>
+                    <td class="duration">5</td>
+                    <td class="budget">3.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">技术部</td>
+                </tr>
+                
+                <!-- 第二阶段：内容制作与生产 -->
+                <tr class="level-1">
+                    <td class="wbs-code">2</td>
+                    <td rowspan="36"><strong>第二阶段<br>内容制作<br>与生产</strong></td>
+                    <td class="task-name"><strong>内容制作与生产阶段</strong></td>
+                    <td>全部营销内容素材</td>
+                    <td class="center">10/1</td>
+                    <td class="center">10/31</td>
+                    <td class="duration">31</td>
+                    <td class="budget">45.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 2.1 电子手册制作 -->
+                <tr class="level-2">
+                    <td class="wbs-code">2.1</td>
+                    <td class="task-name indent-1"><strong>电子手册制作</strong></td>
+                    <td>电子版和纸质版手册</td>
+                    <td class="center">10/1</td>
+                    <td class="center">10/10</td>
+                    <td class="duration">10</td>
+                    <td class="budget">8.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">2.1.1</td>
+                    <td class="task-name indent-2">内容确认（宣传内容，操作流程，图片版权等）</td>
+                    <td>内容审核清单</td>
+                    <td class="center">10/1</td>
+                    <td class="center">10/3</td>
+                    <td class="duration">3</td>
+                    <td class="budget">2.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">法务部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">2.1.2</td>
+                    <td class="task-name indent-2">电子稿件制作</td>
+                    <td>电子版手册（PDF/PPT）</td>
+                    <td class="center">10/4</td>
+                    <td class="center">10/6</td>
+                    <td class="duration">3</td>
+                    <td class="budget">2.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">设计部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">2.1.3</td>
+                    <td class="task-name indent-2">纸质册子制作以及物流（印刷数量300份，A4规格）</td>
+                    <td>纸质手册300份</td>
+                    <td class="center">10/7</td>
+                    <td class="center">10/10</td>
+                    <td class="duration">4</td>
+                    <td class="budget">4.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">采购部</td>
+                </tr>
+                
+                <!-- 2.2 展会材料准备 -->
+                <tr class="level-2">
+                    <td class="wbs-code">2.2</td>
+                    <td class="task-name indent-1"><strong>展会材料准备</strong></td>
+                    <td>展会物料套装</td>
+                    <td class="center">10/11</td>
+                    <td class="center">10/15</td>
+                    <td class="duration">5</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">市场部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">2.2.1</td>
+                    <td class="task-name indent-2">展会相关物料制作（易拉宝、展架、海报等）</td>
+                    <td>展会物料一套</td>
+                    <td class="center">10/11</td>
+                    <td class="center">10/13</td>
+                    <td class="duration">3</td>
+                    <td class="budget">3.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">设计部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">2.2.2</td>
+                    <td class="task-name indent-2">纸质册子发放计划与执行</td>
+                    <td>发放执行方案</td>
+                    <td class="center">10/14</td>
+                    <td class="center">10/15</td>
+                    <td class="duration">2</td>
+                    <td class="budget">2.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">销售部</td>
+                </tr>
+                
+                <!-- 2.3 视频制作（详细分解） -->
+                <tr class="level-2">
+                    <td class="wbs-code">2.3</td>
+                    <td class="task-name indent-1"><strong>视频内容制作（核心）</strong></td>
+                    <td>全系列营销视频18个</td>
+                    <td class="center">10/16</td>
+                    <td class="center">10/31</td>
+                    <td class="duration">16</td>
+                    <td class="budget">32.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 功能演示视频系列 -->
+                <tr class="level-3">
+                    <td class="wbs-code">2.3.1</td>
+                    <td class="task-name indent-2"><strong>功能演示视频系列（8个30秒）</strong></td>
+                    <td>8个功能短视频</td>
+                    <td class="center">10/16</td>
+                    <td class="center">10/20</td>
+                    <td class="duration">5</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">视频组</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.1</td>
+                    <td class="task-name indent-3">AI-OCR识别演示（PDF/图片/Excel多格式）</td>
+                    <td>OCR功能视频</td>
+                    <td class="center">10/16</td>
+                    <td class="center">10/16</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.2</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.2</td>
+                    <td class="task-name indent-3">多语言识别演示（中/日/英）</td>
+                    <td>多语言视频</td>
+                    <td class="center">10/16</td>
+                    <td class="center">10/17</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.2</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.3</td>
+                    <td class="task-name indent-3">智能校验纠错功能演示</td>
+                    <td>校验功能视频</td>
+                    <td class="center">10/17</td>
+                    <td class="center">10/17</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.3</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.4</td>
+                    <td class="task-name indent-3">RAG知识库查询演示</td>
+                    <td>知识库视频</td>
+                    <td class="center">10/17</td>
+                    <td class="center">10/18</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.3</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.5</td>
+                    <td class="task-name indent-3">HS编码智能推荐演示</td>
+                    <td>HS编码视频</td>
+                    <td class="center">10/18</td>
+                    <td class="center">10/18</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.3</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.6</td>
+                    <td class="task-name indent-3">AI Agent自动化处理演示</td>
+                    <td>自动化视频</td>
+                    <td class="center">10/18</td>
+                    <td class="center">10/19</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.3</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.7</td>
+                    <td class="task-name indent-3">异常处理与人工干预演示</td>
+                    <td>异常处理视频</td>
+                    <td class="center">10/19</td>
+                    <td class="center">10/19</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.3</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.1.8</td>
+                    <td class="task-name indent-3">数据分析报表演示</td>
+                    <td>报表功能视频</td>
+                    <td class="center">10/19</td>
+                    <td class="center">10/20</td>
+                    <td class="duration">1</td>
+                    <td class="budget">1.1</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 完整流程视频 -->
+                <tr class="level-3">
+                    <td class="wbs-code">2.3.2</td>
+                    <td class="task-name indent-2"><strong>完整流程演示视频（3个3-5分钟）</strong></td>
+                    <td>3个流程视频</td>
+                    <td class="center">10/21</td>
+                    <td class="center">10/25</td>
+                    <td class="duration">5</td>
+                    <td class="budget">12.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">视频组</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.2.1</td>
+                    <td class="task-name indent-3">端到端报关流程完整演示</td>
+                    <td>完整流程视频</td>
+                    <td class="center">10/21</td>
+                    <td class="center">10/22</td>
+                    <td class="duration">2</td>
+                    <td class="budget">4.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.2.2</td>
+                    <td class="task-name indent-3">批量处理流程演示</td>
+                    <td>批量处理视频</td>
+                    <td class="center">10/23</td>
+                    <td class="center">10/24</td>
+                    <td class="duration">2</td>
+                    <td class="budget">4.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.2.3</td>
+                    <td class="task-name indent-3">多系统集成演示（邮件/API/网页）</td>
+                    <td>系统集成视频</td>
+                    <td class="center">10/24</td>
+                    <td class="center">10/25</td>
+                    <td class="duration">1</td>
+                    <td class="budget">4.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 营销卖点视频 -->
+                <tr class="level-3">
+                    <td class="wbs-code">2.3.3</td>
+                    <td class="task-name indent-2"><strong>营销卖点视频（5个15-30秒）</strong></td>
+                    <td>5个营销短视频</td>
+                    <td class="center">10/26</td>
+                    <td class="center">10/28</td>
+                    <td class="duration">3</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">视频组</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.3.1</td>
+                    <td class="task-name indent-3">"30秒完成报关"效率卖点</td>
+                    <td>效率卖点视频</td>
+                    <td class="center">10/26</td>
+                    <td class="center">10/26</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.3.2</td>
+                    <td class="task-name indent-3">"95%识别准确率"精准卖点</td>
+                    <td>精准卖点视频</td>
+                    <td class="center">10/26</td>
+                    <td class="center">10/27</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.3.3</td>
+                    <td class="task-name indent-3">"多语言支持"全球化卖点</td>
+                    <td>国际化视频</td>
+                    <td class="center">10/27</td>
+                    <td class="center">10/27</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.3.4</td>
+                    <td class="task-name indent-3">"成本降低80%"经济卖点</td>
+                    <td>成本节省视频</td>
+                    <td class="center">10/27</td>
+                    <td class="center">10/28</td>
+                    <td class="duration">0.5</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.3.5</td>
+                    <td class="task-name indent-3">"合规保障"安全卖点</td>
+                    <td>合规安全视频</td>
+                    <td class="center">10/28</td>
+                    <td class="center">10/28</td>
+                    <td class="duration">1</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 客户案例视频 -->
+                <tr class="level-3">
+                    <td class="wbs-code">2.3.4</td>
+                    <td class="task-name indent-2"><strong>客户案例视频（2个2-3分钟）</strong></td>
+                    <td>2个案例视频</td>
+                    <td class="center">10/29</td>
+                    <td class="center">10/30</td>
+                    <td class="duration">2</td>
+                    <td class="budget">3.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">客户组</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.4.1</td>
+                    <td class="task-name indent-3">大型企业应用案例</td>
+                    <td>大企业案例</td>
+                    <td class="center">10/29</td>
+                    <td class="center">10/29</td>
+                    <td class="duration">1</td>
+                    <td class="budget">1.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.4.2</td>
+                    <td class="task-name indent-3">中小企业效率提升案例</td>
+                    <td>中小企业案例</td>
+                    <td class="center">10/30</td>
+                    <td class="center">10/30</td>
+                    <td class="duration">1</td>
+                    <td class="budget">1.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 视频后期 -->
+                <tr class="level-3">
+                    <td class="wbs-code">2.3.5</td>
+                    <td class="task-name indent-2"><strong>视频后期制作与优化</strong></td>
+                    <td>成品视频集</td>
+                    <td class="center">10/31</td>
+                    <td class="center">10/31</td>
+                    <td class="duration">1</td>
+                    <td class="budget">2.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">后期组</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.5.1</td>
+                    <td class="task-name indent-3">视频剪辑与特效制作</td>
+                    <td>特效成品</td>
+                    <td class="center">10/31</td>
+                    <td class="center">10/31</td>
+                    <td class="duration">0.3</td>
+                    <td class="budget">0.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.5.2</td>
+                    <td class="task-name indent-3">配音与字幕制作（中/日/英）</td>
+                    <td>多语言字幕</td>
+                    <td class="center">10/31</td>
+                    <td class="center">10/31</td>
+                    <td class="duration">0.3</td>
+                    <td class="budget">0.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.5.3</td>
+                    <td class="task-name indent-3">背景音乐与音效添加</td>
+                    <td>音频处理</td>
+                    <td class="center">10/31</td>
+                    <td class="center">10/31</td>
+                    <td class="duration">0.2</td>
+                    <td class="budget">0.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-4">
+                    <td class="wbs-code">2.3.5.4</td>
+                    <td class="task-name indent-3">多平台格式输出（抖音/B站/YouTube）</td>
+                    <td>多格式视频</td>
+                    <td class="center">10/31</td>
+                    <td class="center">10/31</td>
+                    <td class="duration">0.2</td>
+                    <td class="budget">0.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 第三阶段：技术平台搭建 -->
+                <tr class="level-1">
+                    <td class="wbs-code">3</td>
+                    <td rowspan="7"><strong>第三阶段<br>技术平台<br>搭建</strong></td>
+                    <td class="task-name"><strong>技术平台搭建阶段</strong></td>
+                    <td>营销技术平台</td>
+                    <td class="center">11/1</td>
+                    <td class="center">11/15</td>
+                    <td class="duration">15</td>
+                    <td class="budget">20.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 3.1 试用系统开发 -->
+                <tr class="level-2">
+                    <td class="wbs-code">3.1</td>
+                    <td class="task-name indent-1"><strong>试用链接系统开发</strong></td>
+                    <td>试用管理系统</td>
+                    <td class="center">11/1</td>
+                    <td class="center">11/8</td>
+                    <td class="duration">8</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">技术部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">3.1.1</td>
+                    <td class="task-name indent-2">试用链接生成器开发</td>
+                    <td>链接生成功能</td>
+                    <td class="center">11/1</td>
+                    <td class="center">11/4</td>
+                    <td class="duration">4</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">开发组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">3.1.2</td>
+                    <td class="task-name indent-2">后台管理系统开发</td>
+                    <td>管理后台</td>
+                    <td class="center">11/5</td>
+                    <td class="center">11/8</td>
+                    <td class="duration">4</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">开发组</td>
+                </tr>
+                
+                <!-- 3.2 数据分析平台 -->
+                <tr class="level-2">
+                    <td class="wbs-code">3.2</td>
+                    <td class="task-name indent-1"><strong>数据分析与自动化</strong></td>
+                    <td>数据分析与自动化工具</td>
+                    <td class="center">11/9</td>
+                    <td class="center">11/15</td>
+                    <td class="duration">7</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">数据组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">3.2.1</td>
+                    <td class="task-name indent-2">数据分析平台搭建</td>
+                    <td>数据仪表板</td>
+                    <td class="center">11/9</td>
+                    <td class="center">11/12</td>
+                    <td class="duration">4</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">数据组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">3.2.2</td>
+                    <td class="task-name indent-2">营销自动化工具部署</td>
+                    <td>自动化营销系统</td>
+                    <td class="center">11/13</td>
+                    <td class="center">11/15</td>
+                    <td class="duration">3</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">技术部</td>
+                </tr>
+                
+                <!-- 第四阶段：营销推广执行 -->
+                <tr class="level-1">
+                    <td class="wbs-code">4</td>
+                    <td rowspan="14"><strong>第四阶段<br>营销推广<br>执行</strong></td>
+                    <td class="task-name"><strong>营销推广执行阶段</strong></td>
+                    <td>全渠道营销推广</td>
+                    <td class="center">11/16</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">30</td>
+                    <td class="budget">50.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 4.1 官方账户运营 -->
+                <tr class="level-2">
+                    <td class="wbs-code">4.1</td>
+                    <td class="task-name indent-1"><strong>官方账户运营</strong></td>
+                    <td>社交媒体内容</td>
+                    <td class="center">11/16</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">30</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">新媒体组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.1.1</td>
+                    <td class="task-name indent-2">微信公众号运营（发文、互动）</td>
+                    <td>公众号内容30篇</td>
+                    <td class="center">11/16</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">30</td>
+                    <td class="budget">3.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">内容组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.1.2</td>
+                    <td class="task-name indent-2">抖音/小红书账号运营</td>
+                    <td>短视频内容60条</td>
+                    <td class="center">11/16</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">30</td>
+                    <td class="budget">4.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">视频组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.1.3</td>
+                    <td class="task-name indent-2">LinkedIn/Twitter运营（国际市场）</td>
+                    <td>英文内容30篇</td>
+                    <td class="center">11/16</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">30</td>
+                    <td class="budget">3.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">海外组</td>
+                </tr>
+                
+                <!-- 4.2 SEO与SEM -->
+                <tr class="level-2">
+                    <td class="wbs-code">4.2</td>
+                    <td class="task-name indent-1"><strong>SEO优化与SEM投放</strong></td>
+                    <td>搜索引擎营销</td>
+                    <td class="center">11/16</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">30</td>
+                    <td class="budget">15.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">SEO组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.2.1</td>
+                    <td class="task-name indent-2">网站SEO优化（关键词、内容优化）</td>
+                    <td>SEO优化报告</td>
+                    <td class="center">11/16</td>
+                    <td class="center">11/30</td>
+                    <td class="duration">15</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">SEO组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.2.2</td>
+                    <td class="task-name indent-2">百度/Google广告投放</td>
+                    <td>SEM投放报告</td>
+                    <td class="center">12/1</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">15</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">投放组</td>
+                </tr>
+                
+                <!-- 4.3 线上活动 -->
+                <tr class="level-2">
+                    <td class="wbs-code">4.3</td>
+                    <td class="task-name indent-1"><strong>线上活动与推广</strong></td>
+                    <td>营销活动执行</td>
+                    <td class="center">11/20</td>
+                    <td class="center">12/10</td>
+                    <td class="duration">21</td>
+                    <td class="budget">15.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">活动组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.3.1</td>
+                    <td class="task-name indent-2">线上发布会策划与执行</td>
+                    <td>发布会视频与报告</td>
+                    <td class="center">11/20</td>
+                    <td class="center">11/25</td>
+                    <td class="duration">6</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">活动组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.3.2</td>
+                    <td class="task-name indent-2">线上视频会议引流与内容制作</td>
+                    <td>会议视频10场</td>
+                    <td class="center">11/26</td>
+                    <td class="center">12/5</td>
+                    <td class="duration">10</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">销售部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.3.3</td>
+                    <td class="task-name indent-2">KOL合作推广</td>
+                    <td>KOL合作5位</td>
+                    <td class="center">12/6</td>
+                    <td class="center">12/10</td>
+                    <td class="duration">5</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">公关部</td>
+                </tr>
+                
+                <!-- 4.4 广告投放 -->
+                <tr class="level-2">
+                    <td class="wbs-code">4.4</td>
+                    <td class="task-name indent-1"><strong>付费广告投放</strong></td>
+                    <td>广告投放执行</td>
+                    <td class="center">12/1</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">15</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">投放组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">4.4.1</td>
+                    <td class="task-name indent-2">信息流广告投放（头条、腾讯广告）</td>
+                    <td>投放数据报告</td>
+                    <td class="center">12/1</td>
+                    <td class="center">12/15</td>
+                    <td class="duration">15</td>
+                    <td class="budget">10.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">投放组</td>
+                </tr>
+                
+                <!-- 第五阶段：评估与优化 -->
+                <tr class="level-1">
+                    <td class="wbs-code">5</td>
+                    <td rowspan="9"><strong>第五阶段<br>评估优化<br>与收尾</strong></td>
+                    <td class="task-name"><strong>效果评估与项目收尾</strong></td>
+                    <td>项目总结报告</td>
+                    <td class="center">12/16</td>
+                    <td class="center">12/31</td>
+                    <td class="duration">16</td>
+                    <td class="budget">5.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-i">I</span></td>
+                    <td class="center"><span class="role-badge role-i">I</span></td>
+                    <td class="center">-</td>
+                </tr>
+                
+                <!-- 5.1 效果评估 -->
+                <tr class="level-2">
+                    <td class="wbs-code">5.1</td>
+                    <td class="task-name indent-1"><strong>营销效果评估</strong></td>
+                    <td>评估报告</td>
+                    <td class="center">12/16</td>
+                    <td class="center">12/25</td>
+                    <td class="duration">10</td>
+                    <td class="budget">3.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-as">As</span></td>
+                    <td class="center">-</td>
+                    <td class="center">数据组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">5.1.1</td>
+                    <td class="task-name indent-2">数据收集与分析</td>
+                    <td>数据分析报告</td>
+                    <td class="center">12/16</td>
+                    <td class="center">12/20</td>
+                    <td class="duration">5</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">数据组</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">5.1.2</td>
+                    <td class="task-name indent-2">试用反馈收集与总结</td>
+                    <td>用户反馈报告</td>
+                    <td class="center">12/16</td>
+                    <td class="center">12/20</td>
+                    <td class="duration">5</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">客服部</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">5.1.3</td>
+                    <td class="task-name indent-2">ROI分析与改善策略</td>
+                    <td>ROI分析报告</td>
+                    <td class="center">12/21</td>
+                    <td class="center">12/25</td>
+                    <td class="duration">5</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-c">C</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">财务部</td>
+                </tr>
+                
+                <!-- 5.2 项目收尾 -->
+                <tr class="level-2">
+                    <td class="wbs-code">5.2</td>
+                    <td class="task-name indent-1"><strong>项目收尾</strong></td>
+                    <td>项目总结文档</td>
+                    <td class="center">12/26</td>
+                    <td class="center">12/31</td>
+                    <td class="duration">6</td>
+                    <td class="budget">2.0</td>
+                    <td class="center">√</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center"><span class="role-badge role-a">A</span></td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-i">I</span></td>
+                    <td class="center"><span class="role-badge role-i">I</span></td>
+                    <td class="center">PMO</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">5.2.1</td>
+                    <td class="task-name indent-2">项目总结报告编写</td>
+                    <td>总结报告</td>
+                    <td class="center">12/26</td>
+                    <td class="center">12/28</td>
+                    <td class="duration">3</td>
+                    <td class="budget">1.0</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">5.2.2</td>
+                    <td class="task-name indent-2">经验教训总结</td>
+                    <td>经验文档</td>
+                    <td class="center">12/29</td>
+                    <td class="center">12/30</td>
+                    <td class="duration">2</td>
+                    <td class="budget">0.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center"><span class="role-badge role-i">I</span></td>
+                    <td class="center"><span class="role-badge role-i">I</span></td>
+                    <td class="center">全体</td>
+                </tr>
+                <tr class="level-3">
+                    <td class="wbs-code">5.2.3</td>
+                    <td class="task-name indent-2">项目文档归档</td>
+                    <td>项目档案</td>
+                    <td class="center">12/31</td>
+                    <td class="center">12/31</td>
+                    <td class="duration">1</td>
+                    <td class="budget">0.5</td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="status-pending">待开始</span></td>
+                    <td class="center">-</td>
+                    <td class="center"><span class="role-badge role-r">R</span></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
+                    <td class="center">PMO</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="padding: 20px; background: #f9f9f9; border-top: 2px solid #ddd;">
+            <h3 style="margin-bottom: 15px; color: #2c5f2d;">📊 项目总览</h3>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #1976d2; margin-bottom: 10px;">项目阶段划分</h4>
+                    <ul style="line-height: 1.8; list-style: none; padding-left: 0;">
+                        <li>📌 <strong>第一阶段（9/14-9/30）：</strong>项目启动与准备</li>
+                        <li>📝 <strong>第二阶段（10/1-10/31）：</strong>内容制作与生产</li>
+                        <li>💻 <strong>第三阶段（11/1-11/15）：</strong>技术平台搭建</li>
+                        <li>🚀 <strong>第四阶段（11/16-12/15）：</strong>营销推广执行</li>
+                        <li>📈 <strong>第五阶段（12/16-12/31）：</strong>评估优化与收尾</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #1976d2; margin-bottom: 10px;">核心指标</h4>
+                    <ul style="line-height: 1.8; list-style: none; padding-left: 0;">
+                        <li>⏱ <strong>项目周期：</strong>109天（9/14-12/31）</li>
+                        <li>💰 <strong>总预算：</strong>130万元</li>
+                        <li>👥 <strong>参与团队：</strong>12个部门</li>
+                        <li>📹 <strong>视频产出：</strong>16个营销视频</li>
+                        <li>🎯 <strong>里程碑：</strong>8个关键节点</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4 style="color: #1976d2; margin-bottom: 10px;">风险提示</h4>
+                    <ul style="line-height: 1.8; list-style: none; padding-left: 0;">
+                        <li>⚠️ 知识产权申请需尽早启动</li>
+                        <li>⚠️ 视频制作周期较紧张，需提前准备</li>
+                        <li>⚠️ 技术平台开发需与营销同步</li>
+                        <li>⚠️ 广告投放ROI需持续监控</li>
+                        <li>⚠️ 展会物料需提前2周准备</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                <strong>💡 优化说明：</strong>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    本版WBS在原始结构基础上进行了以下优化：<br>
+                    1. 将任务重新组织为5个清晰的项目阶段<br>
+                    2. 细化了视频制作部分（2.3节），明确了16个视频的具体类型<br>
+                    3. 完善了RACI责任矩阵，明确各方职责<br>
+                    4. 添加了具体的可交付成果和时间节点<br>
+                    5. 标注了8个关键里程碑节点
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
